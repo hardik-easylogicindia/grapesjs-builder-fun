@@ -73,7 +73,7 @@
   }
 
   body {
-    @apply bg-background text-foreground font-sans antialiased;
+    @apply bg-background text-foreground font-sans antialiased m-0 p-0 overflow-hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -105,7 +105,7 @@
 
 /* GrapeJS specific styles */
 .gjs-one-bg {
-  background-color: rgba(255, 255, 255, 0.95);
+  background-color: rgba(255, 255, 255, 0.98);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(209, 213, 219, 0.3);
@@ -140,6 +140,119 @@
 .gjs-pn-panel {
   border-radius: 8px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* Block styling */
+.gjs-block {
+  padding: 0 !important;
+  width: 100% !important;
+  min-height: 90px !important;
+  border-radius: 8px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05) !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  transition: all 0.2s ease !important;
+  margin-bottom: 10px !important;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-color: #ffffff !important;
+}
+
+.gjs-block:hover {
+  border-color: rgba(37, 99, 235, 0.5) !important;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.1) !important;
+  transform: translateY(-2px) !important;
+}
+
+.gjs-block-label {
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  color: #333 !important;
+  padding: 0 8px !important;
+}
+
+.gjs-block-svg {
+  width: 40px !important;
+  height: 40px !important;
+  margin-bottom: 8px !important;
+}
+
+.gjs-block-categories {
+  padding: 10px !important;
+}
+
+.gjs-block-category {
+  margin-bottom: 20px !important;
+}
+
+.gjs-title {
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  color: #333 !important;
+  margin-bottom: 10px !important;
+  padding: 0 !important;
+}
+
+.gjs-category-title {
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  color: #1e293b !important;
+  letter-spacing: 0.5px !important;
+  padding: 12px 10px 8px !important;
+  margin-bottom: 8px !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
+}
+
+.gjs-sm-sector {
+  margin-bottom: 20px !important;
+  background-color: #fff !important;
+  border-radius: 8px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05) !important;
+  overflow: hidden !important;
+}
+
+.gjs-sm-title {
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  padding: 12px 16px !important;
+  color: #333 !important;
+  background-color: rgba(0, 0, 0, 0.02) !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
+}
+
+.gjs-field {
+  background-color: #f9fafb !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  border-radius: 6px !important;
+  box-shadow: none !important;
+  transition: all 0.2s ease !important;
+}
+
+.gjs-field:focus {
+  border-color: rgba(37, 99, 235, 0.5) !important;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1) !important;
+}
+
+.gjs-layer {
+  padding: 10px !important;
+  margin-bottom: 5px !important;
+  background-color: #fff !important;
+  border-radius: 6px !important;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05) !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  transition: all 0.2s ease !important;
+}
+
+.gjs-layer:hover {
+  background-color: #f9fafb !important;
+}
+
+.gjs-layer.gjs-selected {
+  border-color: rgba(37, 99, 235, 0.5) !important;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2) !important;
 }
 
 /* Smooth scrolling */

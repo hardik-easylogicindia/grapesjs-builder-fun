@@ -6,6 +6,7 @@ import BlurPanel from "./BlurPanel";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 interface BuilderProps {
   id: string;
@@ -479,116 +480,126 @@ const Builder = ({ id, className }: BuilderProps) => {
   }, [id]);
   
   return (
-    <div className={className}>
-      <div className="flex flex-col h-full">
-        {/* Toolbar */}
-        <div className="bg-white border-b border-gray-200 p-2 flex items-center justify-between mb-4">
-          <div className="flex items-center space-x-2">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={handleLoadTemplate}
-              className="flex items-center gap-1"
-            >
-              <Layout className="w-4 h-4" />
-              <span>Template</span>
-            </Button>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={handleClearCanvas}
-              className="flex items-center gap-1"
-            >
-              <Plus className="w-4 h-4" />
-              <span>New</span>
-            </Button>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={handleExportHtml}
-              className="flex items-center gap-1"
-            >
-              <Save className="w-4 h-4" />
-              <span>Export</span>
-            </Button>
-          </div>
-          
-          <div className="flex items-center space-x-2">
-            <Button
-              variant={currentDevice === "Desktop" ? "default" : "outline"}
-              size="sm"
-              onClick={() => handleDeviceChange("Desktop")}
-              className="flex items-center gap-1"
-            >
-              <Monitor className="w-4 h-4" />
-            </Button>
-            <Button
-              variant={currentDevice === "Tablet" ? "default" : "outline"}
-              size="sm"
-              onClick={() => handleDeviceChange("Tablet")}
-              className="flex items-center gap-1"
-            >
-              <Tablet className="w-4 h-4" />
-            </Button>
-            <Button
-              variant={currentDevice === "Mobile" ? "default" : "outline"}
-              size="sm"
-              onClick={() => handleDeviceChange("Mobile")}
-              className="flex items-center gap-1"
-            >
-              <Smartphone className="w-4 h-4" />
-            </Button>
-          </div>
+    <div className={`${className} flex flex-col h-full`}>
+      {/* Toolbar */}
+      <div className="bg-white border-b border-gray-200 p-2 flex items-center justify-between z-10">
+        <div className="flex items-center space-x-2">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={handleLoadTemplate}
+            className="flex items-center gap-1"
+          >
+            <Layout className="w-4 h-4" />
+            <span>Template</span>
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={handleClearCanvas}
+            className="flex items-center gap-1"
+          >
+            <Plus className="w-4 h-4" />
+            <span>New</span>
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={handleExportHtml}
+            className="flex items-center gap-1"
+          >
+            <Save className="w-4 h-4" />
+            <span>Export</span>
+          </Button>
         </div>
         
-        <div className="flex flex-1 gap-4 h-full overflow-hidden">
-          {/* Left sidebar with tabs */}
-          <BlurPanel className="w-72 h-full overflow-hidden flex flex-col">
-            <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full h-full flex flex-col">
-              <TabsList className="w-full mb-4 h-10 grid grid-cols-3">
-                <TabsTrigger value="blocks" className="flex items-center gap-1 text-xs">
-                  <Layout className="w-4 h-4" />
-                  <span>Blocks</span>
-                </TabsTrigger>
-                <TabsTrigger value="layers" className="flex items-center gap-1 text-xs">
-                  <Layers className="w-4 h-4" />
-                  <span>Layers</span>
-                </TabsTrigger>
-                <TabsTrigger value="styles" className="flex items-center gap-1 text-xs">
-                  <Type className="w-4 h-4" />
-                  <span>Styles</span>
-                </TabsTrigger>
-              </TabsList>
-              
-              <TabsContent value="blocks" className="flex-1 overflow-y-auto p-2">
-                <div id="blocks-container" className="w-full"></div>
-              </TabsContent>
-              
-              <TabsContent value="layers" className="flex-1 overflow-y-auto p-2">
-                <div id="layers-container" className="w-full"></div>
-              </TabsContent>
-              
-              <TabsContent value="styles" className="flex-1 overflow-y-auto p-2">
-                <div id="styles-container" className="w-full"></div>
-                <div id="selectors-container" className="w-full mt-4"></div>
-              </TabsContent>
-            </Tabs>
-          </BlurPanel>
-          
-          {/* Main editor area */}
-          <BlurPanel className="relative flex-1 h-full overflow-hidden">
-            {isLoading && (
-              <div className="absolute inset-0 flex items-center justify-center bg-white/80 backdrop-blur-sm z-10">
-                <Loader className="w-8 h-8 text-blue-500 animate-spin" />
-                <span className="ml-3 text-lg font-medium">Loading editor...</span>
-              </div>
-            )}
-            <div 
-              id={id} 
-              ref={editorRef} 
-              className="w-full h-full"
-            ></div>
-          </BlurPanel>
+        <div className="flex items-center space-x-2">
+          <Button
+            variant={currentDevice === "Desktop" ? "default" : "outline"}
+            size="sm"
+            onClick={() => handleDeviceChange("Desktop")}
+            className="flex items-center gap-1"
+          >
+            <Monitor className="w-4 h-4" />
+          </Button>
+          <Button
+            variant={currentDevice === "Tablet" ? "default" : "outline"}
+            size="sm"
+            onClick={() => handleDeviceChange("Tablet")}
+            className="flex items-center gap-1"
+          >
+            <Tablet className="w-4 h-4" />
+          </Button>
+          <Button
+            variant={currentDevice === "Mobile" ? "default" : "outline"}
+            size="sm"
+            onClick={() => handleDeviceChange("Mobile")}
+            className="flex items-center gap-1"
+          >
+            <Smartphone className="w-4 h-4" />
+          </Button>
+        </div>
+      </div>
+      
+      <div className="flex flex-1 h-[calc(100%-52px)] overflow-hidden">
+        {/* Left sidebar with tabs */}
+        <BlurPanel className="w-72 h-full overflow-hidden flex flex-col shadow-xl border-r border-gray-300/20 rounded-none">
+          <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full h-full flex flex-col">
+            <TabsList className="w-full h-12 grid grid-cols-3 bg-gradient-to-r from-gray-100 to-gray-50 border-b border-gray-200/50 rounded-none p-1">
+              <TabsTrigger value="blocks" className="flex items-center gap-1 text-sm font-medium rounded-md data-[state=active]:bg-white data-[state=active]:text-blue-600 data-[state=active]:shadow-sm transition-all">
+                <Layout className="w-4 h-4" />
+                <span>Blocks</span>
+              </TabsTrigger>
+              <TabsTrigger value="layers" className="flex items-center gap-1 text-sm font-medium rounded-md data-[state=active]:bg-white data-[state=active]:text-blue-600 data-[state=active]:shadow-sm transition-all">
+                <Layers className="w-4 h-4" />
+                <span>Layers</span>
+              </TabsTrigger>
+              <TabsTrigger value="styles" className="flex items-center gap-1 text-sm font-medium rounded-md data-[state=active]:bg-white data-[state=active]:text-blue-600 data-[state=active]:shadow-sm transition-all">
+                <Type className="w-4 h-4" />
+                <span>Styles</span>
+              </TabsTrigger>
+            </TabsList>
+            
+            <TabsContent value="blocks" className="flex-1 overflow-hidden p-0 m-0">
+              <ScrollArea className="h-full">
+                <div className="p-4">
+                  <div id="blocks-container" className="w-full grid grid-cols-2 gap-3"></div>
+                </div>
+              </ScrollArea>
+            </TabsContent>
+            
+            <TabsContent value="layers" className="flex-1 overflow-hidden p-0 m-0">
+              <ScrollArea className="h-full">
+                <div className="p-4">
+                  <div id="layers-container" className="w-full"></div>
+                </div>
+              </ScrollArea>
+            </TabsContent>
+            
+            <TabsContent value="styles" className="flex-1 overflow-hidden p-0 m-0">
+              <ScrollArea className="h-full">
+                <div className="p-4">
+                  <div id="styles-container" className="w-full"></div>
+                  <div id="selectors-container" className="w-full mt-4"></div>
+                </div>
+              </ScrollArea>
+            </TabsContent>
+          </Tabs>
+        </BlurPanel>
+        
+        {/* Main editor area */}
+        <div className="relative flex-1 h-full overflow-hidden">
+          {isLoading && (
+            <div className="absolute inset-0 flex items-center justify-center bg-white/80 backdrop-blur-sm z-10">
+              <Loader className="w-8 h-8 text-blue-500 animate-spin" />
+              <span className="ml-3 text-lg font-medium">Loading editor...</span>
+            </div>
+          )}
+          <div 
+            id={id} 
+            ref={editorRef} 
+            className="w-full h-full"
+          ></div>
         </div>
       </div>
     </div>

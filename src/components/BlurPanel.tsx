@@ -15,17 +15,16 @@ const BlurPanel = ({
 }: BlurPanelProps) => {
   const intensityClasses = {
     light: "bg-white/60 dark:bg-gray-900/60",
-    medium: "bg-white/70 dark:bg-gray-900/70",
-    heavy: "bg-white/80 dark:bg-gray-900/80",
+    medium: "bg-white/80 dark:bg-gray-900/80",
+    heavy: "bg-white/90 dark:bg-gray-900/90",
   };
 
   return (
     <div
       className={cn(
-        "rounded-2xl border border-gray-200 dark:border-gray-800",
-        "backdrop-blur-lg",
+        "backdrop-blur-xl",
         intensityClasses[intensity],
-        "shadow-lg",
+        "shadow-lg transition-all duration-300",
         className
       )}
     >
