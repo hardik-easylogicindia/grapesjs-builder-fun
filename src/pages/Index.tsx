@@ -156,17 +156,6 @@ const Index = () => {
             <p className="text-xl text-gray-600 dark:text-gray-300 mb-8">
               Experiment with our live editor below to see how easy it is to build beautiful pages.
             </p>
-            <div className="flex justify-center gap-4 mb-12">
-              <GradientButton size="md" variant="secondary">
-                Load Template
-              </GradientButton>
-              <GradientButton size="md" variant="secondary">
-                Clear Canvas
-              </GradientButton>
-              <GradientButton size="md">
-                Export HTML
-              </GradientButton>
-            </div>
           </div>
           
           <Builder id="gjs-demo" className="h-[800px]" />
